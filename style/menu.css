@@ -1,0 +1,56 @@
+
+body {
+    overflow-x: hidden;
+}
+
+#bars{
+    text-decoration: none;
+    color: black;
+    font-size: 30px;
+}
+
+#sideMenu{
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: black;
+    opacity: 0.9;
+    overflow-x: hidden;
+    padding-top: 60px;
+    transition: 0.5s;
+}
+
+#sideMenu a{
+    display: block;
+    padding: 20px 30px;
+    font-size: 24px;
+    color: lightgray;
+    text-decoration: none; 
+}
+
+#sideMenu #project{
+    display: none;
+    padding-left: 40px;
+}
+
+#sideMenu a:hover{
+    color: white;
+    transition: 0.2s;
+}
+
+#sideMenu #close{
+    position: absolute;
+    top: 0;
+    right: 30px;
+    font-size: 30px;
+}
+
+#home{
+    display:block;
+}
+#aboutme{
+    display:none;
+}
