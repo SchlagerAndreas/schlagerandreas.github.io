@@ -13,18 +13,20 @@ function showHome(){
     document.getElementById('home').style.display = "block";
 }
 
-function showHome(){
+function showAboutMe(){
     document.getElementById('home').style.display = "none";
     document.getElementById('aboutme').style.display = "block";
 }
 
 
 function showProjects(){
-    var tmp = document.getElementById('project');
-    if(tmp.style.display === "none"){
-        tmp.style.display = "block";
-    }
-    else{
-        tmp.style.display = "none";
+    var tmp = document.getElementsByClassName('project');
+    for(var i = 0; i < tmp.length; i++){
+        if(tmp[i].style.display === "none"){
+            tmp[i].style.display = "block";
+        }
+        else{
+            tmp[i].style.display = "none";
+        }
     }
 }

@@ -3,13 +3,13 @@ body {
     overflow-x: hidden;
 }
 
-#bars{
+#bars {
     text-decoration: none;
     color: black;
     font-size: 30px;
 }
 
-#sideMenu{
+#sideMenu {
     height: 100%;
     width: 0;
     position: fixed;
@@ -23,34 +23,36 @@ body {
     transition: 0.5s;
 }
 
-#sideMenu a{
+#sideMenu a {
     display: block;
     padding: 20px 30px;
     font-size: 24px;
     color: lightgray;
-    text-decoration: none; 
+    text-decoration: none;
+    white-space: nowrap; 
 }
 
-#sideMenu #project{
+#sideMenu .project {
     display: none;
     padding-left: 40px;
 }
 
-#sideMenu a:hover{
+#sideMenu a:hover {
     color: white;
     transition: 0.2s;
 }
 
-#sideMenu #close{
+#sideMenu #close { 
     position: absolute;
     top: 0;
     right: 30px;
     font-size: 30px;
 }
 
-#home{
+#home {
     display:block;
 }
-#aboutme{
+
+#aboutme {
     display:none;
 }
