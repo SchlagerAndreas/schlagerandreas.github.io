@@ -3,6 +3,16 @@ body {
     overflow-x: hidden;
 }
 
+#webpage{
+    margin-left: 0;
+    transition: 0.5s;
+}
+
+#webpage[data-ismenueshown="true"]{
+    margin-left: 250px;
+}
+
+
 #bars {
     text-decoration: none;
     color: black;
@@ -22,6 +32,9 @@ body {
     padding-top: 60px;
     transition: 0.5s;
 }
+#sideMenu[data-visibility = "true"]{
+    width: 250px;
+}
 
 #sideMenu a {
     display: block;
@@ -32,9 +45,12 @@ body {
     white-space: nowrap; 
 }
 
-#sideMenu .project {
-    display: none;
-    padding-left: 40px;
+.projectLink {
+    transform: scale(0%);
+}
+
+.projectLink[data-visibility="true"]{
+    transform: scale(100%);
 }
 
 #sideMenu a:hover {
@@ -49,10 +65,19 @@ body {
     font-size: 30px;
 }
 
-#home {
-    display:block;
+#homeSite{
+    transform: scale(0%);
+    height: 0;
+}
+#homeSite[data-visibility="true"]{
+    transform: scale(100%);
+    height: auto;
 }
 
-#aboutme {
-    display:none;
+#aboutmeSite{
+    transform: scale(0%);
+}
+
+#aboutmeSite[data-visibility="true"]{
+    transform: scale(100%);
 }

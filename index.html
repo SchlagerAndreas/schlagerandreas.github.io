@@ -7,31 +7,32 @@
         <link rel = "stylesheet" type = "text/css" href = "style/overhall.css">
         <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
         <script src="scripts/menu.js"></script>
+        <script src="scripts/main.js"></script>
         <title>My website</title>
 	</head>
 	<body>
-	    <div id="webpage">
+	    <div id="webpage" data-ismenueshown="false">
             <span>
-                <a href="#" id="bars" onclick="openSideMenu()">
+                <a href="#" id="bars">
                     <i class="fas fa-bars"></i>
                 </a>
             </span>
-            <span id="sideMenu">
-                <a href="#" id="close" onclick="closeSideMenu()">
+            <dive id="sideMenu" data-visibility="false">
+                <a href="#" id="closeBtn">
                     <i class="fas fa-times"></i>
                 </a>
-                <a href="#" onclick="showHome()">Home</a>
-                <a href="#" onclick="showAboutMe()">About me</a>
-                <a href="#" onclick="showProjects()">Projects</a>
-                <a target="_blank" href="https://schlagerandreas.github.io/enigma/" class="project">Enigma</a>
-                <a target="_blank" href="#" class="project">Console Games</a>
-                <a target="_blank" href="#" class="project">CT-Header</a>
-            </span>
-            <div id="home">
+                <a class="menueLink" id="home" href="#" >Home</a>
+                <a class="menueLink" id="aboutme" href="#" >About me</a>
+                <a class="menueLink" id="projects" href="#" >Projects</a>
+                <a class="projectLink"  data-visibility="false" target="_blank" href="https://schlagerandreas.github.io/enigma/" >Enigma</a>
+                <a class="projectLink"  data-visibility="false" target="_blank" href="#" >Console Games</a>
+                <a class="projectLink"  data-visibility="false" target="_blank" href="#" >CT-Header</a>
+            </dive>
+            <div id="homeSite" data-visibility="true">
                 <h1>This is my GitHub website</h1>
                 <h2>favourite Projects:</h2>
             </div>
-            <div id="aboutme">
+            <div id="aboutmeSite" data-visibility="false">
                 <h3>here you will see information about me</h3>
             </div>
         </div>
