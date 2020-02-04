@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel = "stylesheet" type = "text/css" href = "style/menu.css">
         <link rel = "stylesheet" type = "text/css" href = "style/overhall.css">
+        <link rel="stylesheet" type="text/css" href="style/home.css">
         <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
         <script src="scripts/menu.js"></script>
         <script src="scripts/main.js"></script>
@@ -17,7 +18,7 @@
                     <i class="fas fa-bars"></i>
                 </a>
             </span>
-            <dive id="sideMenu" data-visibility="false">
+            <div id="sideMenu" data-visibility="false">
                 <a href="#" id="closeBtn">
                     <i class="fas fa-times"></i>
                 </a>
@@ -27,13 +28,22 @@
                 <a class="projectLink"  data-visibility="false" target="_blank" href="https://schlagerandreas.github.io/enigma/" >Enigma</a>
                 <a class="projectLink"  data-visibility="false" target="_blank" href="#" >Console Games</a>
                 <a class="projectLink"  data-visibility="false" target="_blank" href="#" >CT-Header</a>
-            </dive>
+            </div>
             <div id="homeSite" data-visibility="true">
-                <h1>This is my GitHub website</h1>
-                <h2>favourite Projects:</h2>
+                <div id="homePage">
+                    <h1>This is my GitHub website</h1>
+                    <h2>favourite Projects:</h2>
+                    <div id="homeProLinks">
+                        <a class="homeLinks" id="enigmaLink" target="_blank" href="https://schlagerandreas.github.io/enigma/"><img src="media/enigma.png" class="linkImage" alt="Enigma"></a>
+                    </div>
+                </div>
             </div>
             <div id="aboutmeSite" data-visibility="false">
                 <h3>here you will see information about me</h3>
+            </div>
+            <div id="footer">
+                <footer>Schlager Andreas</footer>
+                <a id="footerLink" target="_blank" href="https://github.com/SchlagerAndreas">GITHub</a>
             </div>
         </div>
     </body>
