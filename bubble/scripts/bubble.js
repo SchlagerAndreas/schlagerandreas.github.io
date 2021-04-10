@@ -8,13 +8,7 @@ class Bubble extends PIXI.Container{
         this.height = 2 * outerRadius;
         this.radius = radius;
 
-        let bg = new PIXI.Graphics();
-        bg.beginFill(0xFF0000);
-        bg.drawRect(0,0,2 * outerRadius,2 * outerRadius)
-        bg.endFill();
-        bg.x = 0;
-        bg.y = 0;
-        this.addChild(bg)
+        let textstyle = {fontFamily : 'Arial', fontSize: 100, fill : 0x010101, align : 'center'};
 
         let border = new PIXI.Graphics();
         border.beginFill(0x006994,0.8);
@@ -28,32 +22,69 @@ class Bubble extends PIXI.Container{
         bubble.endFill();
         this.addChild(bubble)
 
-        bubble = new PIXI.Graphics(); 
-        bubble.beginFill(0xadd8e6,0.5);
-        bubble.drawCircle(outerRadius,outerRadius,5)
-        bubble.endFill();
-        this.addChild(bubble)
+        let siteLength = Math.round(radius * Math.sqrt(2));
 
-        let tit = new PIXI.Text(title,{fontFamily : 'Arial', fontSize: 100, fill : 0x101010, align : 'center'});
-        tit.y = Math.round(3/4 * outerRadius);
-        tit.x = 10;
-        tit.height = Math.round(radius / 2);
-        tit.width = Math.round(2 * Math.sqrt(radius * radius - (radius * radius) / 32))
-        this.addChild(tit)
+        let textField = new PIXI.Container;
+        textField.height = textField.width = siteLength;
+        textField.x = textField.y = Math.round(((Math.sqrt(2) * 2 * outerRadius - 2 * radius) / 2) / Math.sqrt(2))
+       
 
-        let tex = new PIXI.Text(text,{fontFamily : 'Arial', fontSize: 100, fill : 0x101010, align : 'center'})
-        tex.y = Math.round(3/4 * outerRadius);
-        tex.x = 10;
-        tex.height = Math.round(radius / 2);
-        tex.width = Math.round(2 * Math.sqrt(radius * radius - (radius * radius) / 32))
-        tex.visible = false;
-        this.addChild(tex)
+        let bTitle = new PIXI.Text(title,textstyle);
+        bTitle.anchor.set(0.5);
+        bTitle.width = siteLength;
+        bTitle.height = Math.round(siteLength / 2);
+        bTitle.x = Math.round(siteLength / 2);
+        bTitle.y = Math.round(siteLength / 2);
+        textField.addChild(bTitle)
 
-        this.interactive = true;
-        this.buttonMode = true;
-        this.on("mouseover",()=>{this.children[4].visible = false;this.children[5].visible = true;})
-        this.on("mouseout",()=>{this.children[4].visible = true;this.children[5].visible = false;})
+        let bText = new PIXI.Text(text,textstyle);
+        bText.anchor.set(0);
+        bText.width = siteLength;
+        bText.height = Math.round(siteLength / 2);
+        bText.x = 0;
+        bText.y = 0;
+        bText.visible = false;
+        textField.addChild(bText)
+
+        let gitLink = new PIXI.Text("@github",textstyle);
+        gitLink.anchor.set(0);
+        gitLink.width = siteLength;
+        gitLink.height = Math.round(siteLength / 4);
+        gitLink.x = 0;
+        gitLink.y = Math.round(siteLength / 2);
+        gitLink.visible = false;
+        gitLink.interactive = true;
+        gitLink.buttonMode = true;
+        gitLink.on("pointerdown",()=>{window.open(link.github, '_blank');})
+        textField.addChild(gitLink)
+
+        if(link.webpage != undefined){
+            let wpLink = new PIXI.Text("@webpage",textstyle);
+            wpLink.anchor.set(0);
+            wpLink.width = siteLength;
+            wpLink.height = Math.round(siteLength / 4);
+            wpLink.x = 0;
+            wpLink.y = Math.round(3 * siteLength / 4);
+            wpLink.visible = false;
+            wpLink.interactive = true;
+            wpLink.buttonMode = true;
+            wpLink.on("pointerdown",()=>{window.open(link.webpage, '_blank');})
+            textField.addChild(wpLink)
+        }
 
         
+        this.addChild(textField)
+        
+        this.interactive = true;
+        this.on("mouseover",()=>{this.reverseVisibility()})
+        this.on("mouseout",()=>{this.reverseVisibility()})
+
+        
+    }
+
+    reverseVisibility(){
+        for(let i = 0; i < this.children[2].children.length; i++){
+            this.children[2].children[i].visible = !this.children[2].children[i].visible;
+        }
     }
 }
