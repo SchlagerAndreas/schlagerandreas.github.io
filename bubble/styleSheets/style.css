@@ -1,0 +1,43 @@
+:root{
+    --bg-color: #263373;
+}
+
+html,body{
+    background-color: var(--bg-color);
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#bubbleWrapper{
+    width: 100%;
+    background-color: var(--bg-color);
+    position: absolute;
+}
+
+#pixiCanvas{
+    position: absolute;
+}
+
+.bgBubble{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: lightblue;
+    border: 5px solid #006994;
+    position: absolute;
+    bottom: 0px;
+}
+
+@keyframes moveUp{
+    100%{
+        bottom: 100%;
+    }
+}

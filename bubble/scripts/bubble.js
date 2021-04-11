@@ -3,22 +3,22 @@ class Bubble extends PIXI.Container{
         super();
         this.x = x;
         this.y = y;
-        let outerRadius = radius + 10;
-        this.width = 2 * outerRadius;
-        this.height = 2 * outerRadius;
+        this.outerRadius = radius + 10;
+        this.width = 2 * this.outerRadiu;
+        this.height = 2 * this.outerRadiu;
         this.radius = radius;
 
-        let textstyle = {fontFamily : 'Arial', fontSize: 100, fill : 0x010101, align : 'center'};
+        let textstyle = {fontFamily : 'Arial', fontSize: 200, fill : 0x010101, align : 'center'};
 
         let border = new PIXI.Graphics();
         border.beginFill(0x006994,0.8);
-        border.drawCircle(outerRadius,outerRadius,outerRadius)
+        border.drawCircle(this.outerRadius,this.outerRadius,this.outerRadius)
         border.endFill();
         this.addChild(border)
 
         let bubble = new PIXI.Graphics(); 
         bubble.beginFill(0xadd8e6,0.5);
-        bubble.drawCircle(outerRadius,outerRadius,radius)
+        bubble.drawCircle(this.outerRadius,this.outerRadius,radius)
         bubble.endFill();
         this.addChild(bubble)
 
@@ -26,7 +26,7 @@ class Bubble extends PIXI.Container{
 
         let textField = new PIXI.Container;
         textField.height = textField.width = siteLength;
-        textField.x = textField.y = Math.round(((Math.sqrt(2) * 2 * outerRadius - 2 * radius) / 2) / Math.sqrt(2))
+        textField.x = textField.y = Math.round(((Math.sqrt(2) * 2 * this.outerRadius - 2 * radius) / 2) / Math.sqrt(2))
        
 
         let bTitle = new PIXI.Text(title,textstyle);
@@ -86,5 +86,10 @@ class Bubble extends PIXI.Container{
         for(let i = 0; i < this.children[2].children.length; i++){
             this.children[2].children[i].visible = !this.children[2].children[i].visible;
         }
+    }
+
+    move(bubbles){
+        this.y -= 5;
+
     }
 }
