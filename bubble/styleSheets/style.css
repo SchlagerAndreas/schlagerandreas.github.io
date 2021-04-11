@@ -20,18 +20,20 @@ html,body{
     width: 100%;
     background-color: var(--bg-color);
     position: absolute;
+    top: 0;
 }
 
 #pixiCanvas{
     position: absolute;
+    top: 0;
 }
 
 .bgBubble{
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background-color: lightblue;
-    border: 5px solid #006994;
+    background-color: #5a9ab7;
+    border: 5px solid #065c88;
     position: absolute;
     bottom: 0px;
 }
