@@ -28,6 +28,14 @@ html,body{
     top: 0;
 }
 
+.animOnce{
+    animation-iteration-count: 1 !important;
+}
+
+.animInf{
+    animation-iteration-count: infinite !important;
+}
+
 .bgBubble{
     width: 20px;
     height: 20px;

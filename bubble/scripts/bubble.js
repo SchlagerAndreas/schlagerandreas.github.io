@@ -64,14 +64,20 @@ class BubbleManager{
      */
     setupBackgroundBubbles(){
         let bubbleWrapper = document.getElementById("bubbleWrapper");
-        while(bubbleWrapper.firstChild){
-            bubbleWrapper.removeChild(bubbleWrapper.firstChild); 
+        // while(bubbleWrapper.firstChild){
+        //     bubbleWrapper.removeChild(bubbleWrapper.firstChild); 
+        // }
+        for(let i = 0; i < bubbleWrapper.children.length;i++){
+            let bubble = bubbleWrapper.children[i];
+            bubble.classList.remove("animInf");
+            bubble.classList.add("animOnce");
+            bubble.addEventListener("animationend",()=>{bubble.remove()})
         }
 
         for(let i = 0; i < Math.round(bubbleWrapper.offsetWidth / 5); i++){
             let div = document.createElement("div");
-            div.setAttribute("class","bgBubble")
-            div.setAttribute("style","left:" + Math.round(Math.random() * (bubbleWrapper.offsetWidth - 20)) + "px; animation: moveUp " + ((Math.random() * 10) + 5) + "s linear infinite");
+            div.setAttribute("class","bgBubble animInf")
+            div.setAttribute("style","left:" + Math.round(Math.random() * (bubbleWrapper.offsetWidth - 20)) + "px; animation: moveUp " + ((Math.random() * 10) + 5) + "s linear");
             bubbleWrapper.appendChild(div)
         }
     }
@@ -153,6 +159,7 @@ class Bubble extends PIXI.Container{
                     gitLink.interactive = true;
                     gitLink.buttonMode = true;
                     gitLink.on("pointerdown",()=>{window.open(link.github, '_blank');})
+                    gitLink.on("tap",()=>{window.open(link.github, '_blank');})
                     textField.addChild(gitLink)
                 }
 
@@ -167,6 +174,7 @@ class Bubble extends PIXI.Container{
                     wpLink.interactive = true;
                     wpLink.buttonMode = true;
                     wpLink.on("pointerdown",()=>{window.open(link.webpage, '_blank');})
+                    wpLink.on("tap",()=>{window.open(link.github, '_blank');})
                     textField.addChild(wpLink)
                 }
             }
@@ -176,6 +184,7 @@ class Bubble extends PIXI.Container{
         this.interactive = true;
         this.on("mouseover",()=>{this.reverseVisibility()})
         this.on("mouseout",()=>{this.reverseVisibility()})
+        this.on("tap",()=>{this.reverseVisibility()})
     }
 
     /**
