@@ -24,25 +24,24 @@ class BubbleManager{
         this.bubbles.push(new Bubble("Enigma",
                                 "An online \n Enigma Machine",
                                 {webpage:"https://schlagerandreas.github.io/enigma/",github:"https://github.com/SchlagerAndreas/enigma"},
-                                "t",
                                 bubbleRadius,
                                 0,
-                                0));
+                                200,
+                                50));
         this.app.stage.addChild(this.bubbles[0])
     
         this.bubbles.push(new Bubble("Mazertron 3000",
                                 "A webpage where you can \n generate and solve mazes.",
                                 {webpage:"https://schlagerandreas.github.io/maze-generator/",github:"https://github.com/SchlagerAndreas/maze-generator"},
-                                "t",
                                 bubbleRadius,
                                 this.app.screen.width / 2 - bubbleRadius,
-                                1 * bubbleRadius));
+                                10 * bubbleRadius,
+                                300));
         this.app.stage.addChild(this.bubbles[1])
     
         this.bubbles.push(new Bubble("Robots",
                                 "An online mini Game. \n Play a soldier and  \n fight against waves of Robots",
                                 {webpage:"https://schlagerandreas.github.io/Robot/",github:"https://github.com/SchlagerAndreas/Robot"},
-                                "t",
                                 bubbleRadius,
                                 this.app.screen.width - 2 * bubbleRadius,
                                 2 * bubbleRadius));
@@ -51,7 +50,6 @@ class BubbleManager{
         this.bubbles.push(new Bubble("Rasputin",
                                 "-",
                                 {github:"https://github.com/SchlagerAndreas"},
-                                "t",
                                 bubbleRadius,
                                 this.app.screen.width / 2,
                                 3 * bubbleRadius));

@@ -1,5 +1,5 @@
 class Bubble extends PIXI.Container{
-    constructor(title,text,link,picture,radius,x,y){
+    constructor(title,text,link,radius,x,y){
         super();
         this.x = x;
         this.y = y;
@@ -8,7 +8,9 @@ class Bubble extends PIXI.Container{
         this.width = 2 * radius;
         this.height = 2 * radius;
         this.radius = radius;
+        this.title = title;
         this.counter = 0;
+        this.rand = Math.random() * 2;
 
         let textstyle = {fontFamily : 'Arial', fontSize: 200, fill : 0x010101, align : 'center'};
 
@@ -90,18 +92,19 @@ class Bubble extends PIXI.Container{
         }
     }
 
-    update(app){
-        // let tmp;
-        // if(this.counter > 4){
-        //     tmp = Math.round(Math.random() * 3);
-        //     this.counter = 0;
-        // }
-        // switch(tmp){
-        //     case 0: this.x++;break;
-        //     case 1: this.x--;break;
-        //     case 2: this.y++;break;
-        //     case 3: this.y--;break;
-        // }
-        // this.counter++;
+    update(app,bubbles){
+        let tmp1 = Math.cos(this.counter / 10);
+        this.x += tmp1 * this.rand;
+        this.y-=2;
+        if(this.x + 2 * this.radius > app.screen.width){
+            this.x = app.screen.width - 2 * this.radius
+        }
+        if(this.x < 0){
+            this.x = 0;
+        }
+        if(this.y + 2 * this.radius < 0){
+            this.y = app.screen.height;
+        }
+        this.counter++;
     }
 }
