@@ -24,6 +24,7 @@ class BubbleManager{
                                 0,
                                 200));
         this.app.stage.addChild(this.bubbles[0])
+
     
         this.bubbles.push(new Bubble("Mazertron 3000",
                                 "A webpage where you can \n generate and solve mazes.",
@@ -44,17 +45,18 @@ class BubbleManager{
     
         this.bubbles.push(new Bubble("Rasputin",
                                 "-",
-                                {github:"https://github.com/SchlagerAndreas"},
+                                {github:"https://github.com/SchlagerAndreas",contributers:{mgehwolf:"https://github.com/mgehwolf",FW006:"https://github.com/FW002"}},
                                 bubbleRadius,
                                 this.app.screen.width / 2,
                                 3 * bubbleRadius));
         this.app.stage.addChild(this.bubbles[3]);
-        this.bubbles.push(new Bubble("",
-                                "",
-                                {},
+        this.bubbles.push(new Bubble("NettoCalc",
+                                "A tool to calculate \n the loan in austria.",
+                                {webpage:"https://patrickgold.dev/nettocalc/",contributers:{patrickgold:"https://github.com/patrickgold",trummlerp:"https://github.com/trummlerp"}},
                                 bubbleRadius,
                                 0,
-                                500,));
+                                5 * bubbleRadius));
+        this.app.stage.addChild(this.bubbles[0])
         this.app.stage.addChild(this.bubbles[4])
         this.app.ticker.add(()=>this.update())
     }
@@ -93,7 +95,7 @@ class BubbleManager{
 }
 
 class Bubble extends PIXI.Container{
-    constructor(title,text,link,radius,x,y){
+    constructor(title,text,links,radius,x,y){
         super();
         this.x = x;
         this.y = y;
@@ -104,6 +106,7 @@ class Bubble extends PIXI.Container{
         this.radius = radius;
         this.counter = 0;
         this.rand = Math.random() * 2;
+        this.isMoving = true;
 
         //Drawing of the bubble
         {
@@ -148,42 +151,50 @@ class Bubble extends PIXI.Container{
 
             //Links within the bubble
             {
-                if(link.github != undefined){
-                    let gitLink = new PIXI.Text("@github",textstyle);
-                    gitLink.anchor.set(0);
-                    gitLink.width = siteLength;
-                    gitLink.height = Math.round(siteLength / 4);
-                    gitLink.x = 0;
-                    gitLink.y = Math.round(siteLength / 2);
-                    gitLink.visible = false;
-                    gitLink.interactive = true;
-                    gitLink.buttonMode = true;
-                    gitLink.on("pointerdown",()=>{window.open(link.github, '_blank');})
-                    gitLink.on("tap",()=>{window.open(link.github, '_blank');})
-                    textField.addChild(gitLink)
+                let linknames = Object.keys(links);
+                let numberOfLinks = linknames.length;
+                let contributersNames = [];
+                if(linknames.includes("contributers")){
+                    contributersNames = Object.keys(links.contributers)
+                    linknames = linknames.filter(element => element !== "contributers")
                 }
 
-                if(link.webpage != undefined){
-                    let wpLink = new PIXI.Text("@webpage",textstyle);
-                    wpLink.anchor.set(0);
-                    wpLink.width = siteLength;
-                    wpLink.height = Math.round(siteLength / 4);
-                    wpLink.x = 0;
-                    wpLink.y = Math.round(3 * siteLength / 4);
-                    wpLink.visible = false;
-                    wpLink.interactive = true;
-                    wpLink.buttonMode = true;
-                    wpLink.on("pointerdown",()=>{window.open(link.webpage, '_blank');})
-                    wpLink.on("tap",()=>{window.open(link.github, '_blank');})
-                    textField.addChild(wpLink)
+                for(let i = 0; i < linknames.length; i++){
+                    let link = new PIXI.Text("@" + linknames[i],textstyle);
+                    link.anchor.set(0);
+                    link.width = siteLength;
+                    link.height = Math.round(siteLength / 2 / (linknames.length + contributersNames.length));
+                    link.x = 0;
+                    link.y = Math.round(siteLength / 2 + (link.height * i));
+                    link.visible = false;
+                    link.interactive = true;
+                    link.buttonMode = true;
+                    link.on("pointerdown",()=>{window.open(links[linknames[i]], '_blank');})
+                    link.on("tap",()=>{window.open(links[linknames[i]], '_blank');})
+                    textField.addChild(link)
+                }
+
+                for(let i = 0; i < contributersNames.length; i++){
+                    let link = new PIXI.Text("@" + contributersNames[i],textstyle);
+                    link.anchor.set(0);
+                    link.width = siteLength;
+                    link.height = Math.round(siteLength / 2 / (linknames.length + contributersNames.length));
+                    link.x = 0;
+                    link.y = Math.round(siteLength / 2 + (link.height * i) + (link.height * linknames.length));
+                    link.visible = false;
+                    link.interactive = true;
+                    link.buttonMode = true;
+                    link.on("pointerdown",()=>{window.open(links.contributers[contributersNames[i]], '_blank');})
+                    link.on("tap",()=>{window.open(links.contributers[contributersNames[i]], '_blank');})
+                    textField.addChild(link)
                 }
             }
             this.addChild(textField)
         } 
         
         this.interactive = true;
-        this.on("mouseover",()=>{this.reverseVisibility()})
-        this.on("mouseout",()=>{this.reverseVisibility()})
+        this.on("mouseover",()=>{this.reverseVisibility(); this.isMoving = false;})
+        this.on("mouseout",()=>{this.reverseVisibility(); this.isMoving = true;})
         this.on("tap",()=>{this.reverseVisibility()})
     }
 
@@ -201,18 +212,20 @@ class Bubble extends PIXI.Container{
      * @param {PIXI.Application} app The application from PIXI
      */
     update(app){
-        let tmp1 = Math.cos(this.counter / 10);
-        this.x += tmp1 * this.rand;
-        this.y-=2;
-        if(this.x + 2 * this.radius > app.screen.width){
-            this.x = app.screen.width - 2 * this.radius
+        if(this.isMoving){
+            let tmp1 = Math.cos(this.counter / 10);
+            this.x += tmp1 * this.rand;
+            this.y-=2;
+            if(this.x + 2 * this.radius > app.screen.width){
+                this.x = app.screen.width - 2 * this.radius
+            }
+            if(this.x < 0){
+                this.x = 0;
+            }
+            if(this.y + 2 * this.radius < 0){
+                this.y = app.screen.height;
+            }
+            this.counter++;
         }
-        if(this.x < 0){
-            this.x = 0;
-        }
-        if(this.y + 2 * this.radius < 0){
-            this.y = app.screen.height;
-        }
-        this.counter++;
     }
 }
