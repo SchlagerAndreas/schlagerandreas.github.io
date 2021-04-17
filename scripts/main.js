@@ -1,3 +1,3 @@
 window.onload = function(){
-    var menu = new sideMenu();
+    bManager = new BubbleManager()
 }

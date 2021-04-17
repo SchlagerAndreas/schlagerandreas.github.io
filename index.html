@@ -1,50 +1,19 @@
 <!DOCTYPE html>
-<html lang = "en">
-	<head>
-        <meta charset = "UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel = "stylesheet" type = "text/css" href = "style/menu.css">
-        <link rel = "stylesheet" type = "text/css" href = "style/overhall.css">
-        <link rel="stylesheet" type="text/css" href="style/home.css">
-        <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
-        <script src="scripts/menu.js"></script>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+        <meta name="author" content="Andreas Schlager">
+        <meta name="description" content="Maze Generator">
+        <title>Website</title>
+        <link rel="stylesheet" href="styleSheets/style.css" type="text/css">
+        <script src="scripts/pixi.min.js"></script>
+        <script src="scripts/bubble.js"></script>
         <script src="scripts/main.js"></script>
-        <title>My website</title>
-	</head>
-	<body>
-	    <div id="webpage" data-ismenueshown="false">
-            <span>
-                <a href="#" id="bars">
-                    <i class="fas fa-bars"></i>
-                </a>
-            </span>
-            <div id="sideMenu" data-visibility="false">
-                <a href="#" id="closeBtn">
-                    <i class="fas fa-times"></i>
-                </a>
-                <a class="menueLink" id="home" href="#" >Home</a>
-                <a class="menueLink" id="aboutme" href="#" >About me</a>
-                <a class="menueLink" id="projects" href="#" >Projects</a>
-                <a class="projectLink"  data-visibility="false" target="_blank" href="https://schlagerandreas.github.io/enigma/" >Enigma</a>
-                <a class="projectLink"  data-visibility="false" target="_blank" href="#" >Console Games</a>
-                <a class="projectLink"  data-visibility="false" target="_blank" href="#" >CT-Header</a>
-            </div>
-            <div id="homeSite" data-visibility="true">
-                <div id="homePage">
-                    <h1>This is my GitHub website</h1>
-                    <h2>favourite Projects:</h2>
-                    <div id="homeProLinks">
-                        <a class="homeLinks" id="enigmaLink" target="_blank" href="https://schlagerandreas.github.io/enigma/"><img src="media/enigma.png" class="linkImage" alt="Enigma"></a>
-                    </div>
-                </div>
-            </div>
-            <div id="aboutmeSite" data-visibility="false">
-                <h3>here you will see information about me</h3>
-            </div>
-            <div id="footer">
-                <footer>Schlager Andreas</footer>
-                <a id="footerLink" target="_blank" href="https://github.com/SchlagerAndreas">GITHub</a>
-            </div>
+    </head>
+    <body>
+        <div id="bubbleWrapper">
         </div>
+        <div id="pixiCanvas"></div>
     </body>
 </html>

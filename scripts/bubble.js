@@ -195,7 +195,7 @@ class Bubble extends PIXI.Container{
         this.interactive = true;
         this.on("mouseover",()=>{this.reverseVisibility(); this.isMoving = false;})
         this.on("mouseout",()=>{this.reverseVisibility(); this.isMoving = true;})
-        this.on("tap",()=>{this.reverseVisibility()})
+        this.on("tap",()=>{this.reverseVisibility(); this.isMoving != this.isMoving;})
     }
 
     /**
