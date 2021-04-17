@@ -89,7 +89,7 @@ class BubbleManager{
      */
     update(){
         for(let i = 0; i < this.bubbles.length; i++){
-            this.bubbles[i].update(this.app);
+            this.bubbles[i].update(this.app,this.bubbles.filter(element => element !== this.bubbles[i]));
         }
     }
 }
@@ -207,17 +207,37 @@ class Bubble extends PIXI.Container{
         }
     }
 
+    isColiding(bubble1,bubble2){
+        let dx = (bubble1.x + bubble1.radius) - (bubble2.x + bubble2.radius); 
+        let dy = (bubble1.y + bubble1.radius) - (bubble2.y + bubble2.radius);
+        let distance = Math.sqrt(dx**2 + dy**2);
+        if(distance <= bubble1.radius + bubble2.radius){
+            let angle = Math.atan2(dy,dx);
+            return {isCol:true,angle:angle,distance:bubble1.radius + bubble2.radius - distance};
+        }
+        else{
+            return {isCol:false};
+        }
+    }
+
     /**
      * Moves the bubble up and siteways. Up movement is reset after hitting the top.
      * @param {PIXI.Application} app The application from PIXI
      */
-    update(app){
+    update(app,bubbles){
         if(this.isMoving){
             let tmp1 = Math.cos(this.counter / 10);
             this.x += tmp1 * this.rand;
             this.y-=2;
+            for(let i = 0; i < bubbles.length; i++){
+                let collision = this.isColiding(this,bubbles[i]);
+                if(collision.isCol){
+                    this.y += Math.sin(collision.angle) * collision.distance;
+                    this.x += Math.cos(collision.angle) * collision.distance;
+                }
+            }
             if(this.x + 2 * this.radius > app.screen.width){
-                this.x = app.screen.width - 2 * this.radius
+                this.x = app.screen.width - 2 * this.radius;
             }
             if(this.x < 0){
                 this.x = 0;
