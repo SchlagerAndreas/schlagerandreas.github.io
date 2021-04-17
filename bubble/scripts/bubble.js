@@ -125,7 +125,7 @@ class Bubble extends PIXI.Container{
         //Text within the bubble
         {
             let siteLength = Math.round(this.innerRadius * Math.sqrt(2));
-            let textstyle = {fontFamily : 'Arial', fontSize: 200, fill : 0x010101, align : 'center'};
+            let textstyle = {fontFamily : 'Consolas', fontSize: 100, fill : 0x010101, align : 'center'};
 
             let textField = new PIXI.Container;
             textField.height = textField.width = siteLength;
@@ -158,34 +158,34 @@ class Bubble extends PIXI.Container{
                     contributersNames = Object.keys(links.contributers)
                     linknames = linknames.filter(element => element !== "contributers")
                 }
-
-                for(let i = 0; i < linknames.length; i++){
-                    let link = new PIXI.Text("@" + linknames[i],textstyle);
-                    link.anchor.set(0);
-                    link.width = siteLength;
-                    link.height = Math.round(siteLength / 2 / (linknames.length + contributersNames.length));
-                    link.x = 0;
-                    link.y = Math.round(siteLength / 2 + (link.height * i));
-                    link.visible = false;
-                    link.interactive = true;
-                    link.buttonMode = true;
-                    link.on("pointerdown",()=>{window.open(links[linknames[i]], '_blank');})
-                    link.on("tap",()=>{window.open(links[linknames[i]], '_blank');})
-                    textField.addChild(link)
-                }
-
+                
                 for(let i = 0; i < contributersNames.length; i++){
                     let link = new PIXI.Text("@" + contributersNames[i],textstyle);
                     link.anchor.set(0);
-                    link.width = siteLength;
+                    link.width = contributersNames[i].length * 15 > siteLength ? siteLength : contributersNames[i].length * 15;
                     link.height = Math.round(siteLength / 2 / (linknames.length + contributersNames.length));
-                    link.x = 0;
+                    link.x = (siteLength - link.width) / 2;
                     link.y = Math.round(siteLength / 2 + (link.height * i) + (link.height * linknames.length));
                     link.visible = false;
                     link.interactive = true;
                     link.buttonMode = true;
                     link.on("pointerdown",()=>{window.open(links.contributers[contributersNames[i]], '_blank');})
                     link.on("tap",()=>{window.open(links.contributers[contributersNames[i]], '_blank');})
+                    textField.addChild(link)
+                }
+                
+                for(let i = 0; i < linknames.length; i++){
+                    let link = new PIXI.Text("@" + linknames[i],textstyle);
+                    link.anchor.set(0);
+                    link.width = linknames[i].length * 15 > siteLength ? siteLength : linknames[i].length * 15;
+                    link.height = Math.round(siteLength / 2 / (linknames.length + contributersNames.length));
+                    link.x = (siteLength - link.width) / 2;
+                    link.y = Math.round(siteLength / 2 + (link.height * i));
+                    link.visible = false;
+                    link.interactive = true;
+                    link.buttonMode = true;
+                    link.on("pointerdown",()=>{window.open(links[linknames[i]], '_blank');})
+                    link.on("tap",()=>{window.open(links[linknames[i]], '_blank');})
                     textField.addChild(link)
                 }
             }
